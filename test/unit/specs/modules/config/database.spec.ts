@@ -1,6 +1,6 @@
 import type { ConfigService } from '@nestjs/config'
 import { when } from 'jest-when'
-import { pgModuleFactory } from 'src/modules/config/database/class/database'
+import { pgModuleFactory } from 'src/modules/config/database/class/dataSourceOptions'
 import { DataSourceOptions } from 'typeorm'
 
 describe('Database Helper', () => {

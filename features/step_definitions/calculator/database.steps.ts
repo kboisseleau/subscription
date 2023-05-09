@@ -1,5 +1,5 @@
 import { Given, When, Then } from 'cucumber'
-import { pgModuleFactory } from '../../../src/modules/config/database/class/database'
+import { pgModuleFactory } from '../../../src/modules/config/database/class/dataSourceOptions'
 import { ConfigService } from '@nestjs/config'
 import { DataSourceOptions } from 'typeorm'
 

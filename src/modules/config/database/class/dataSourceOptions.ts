@@ -11,7 +11,7 @@ function pgModuleFactory (configService: ConfigService): DataSourceOptions {
   const dbPath = configService.getOrThrow<string>('DBPATH') || 'dist/db'
 
   const entitiesPath = `${dbPath}/entities/**/*.js`
-  const migrationssPath = `${dbPath}/migration/*.js`
+  const migrationssPath = `${dbPath}/migrations/*.js`
   const dataSourceOptions: DataSourceOptions = {
     type: 'postgres',
     host,
