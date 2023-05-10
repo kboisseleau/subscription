@@ -1,33 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import { UserService } from './user.service'
+import { UserService } from '../../../../../src/modules/user/services/user/user.service'
 import { plainToInstance } from 'class-transformer'
-import { RegistrationDTO } from '../../dto/registration.dto'
+import { RegistrationDTO } from '../../../../../src/modules/user/dto/registration.dto'
 import { validateSync } from 'class-validator'
 import { Repository } from 'typeorm'
 import { getRepositoryToken } from '@nestjs/typeorm'
 import { User } from '../../../../../db/entities/User'
-import { UserRepositoryService } from '../../repository/user.repository/user.repository.service'
+import { UserRepositoryService } from '../../../../../src/modules/user/repository/user.repository/user.repository.service'
+import { UserMock, RepositoryrMock } from '../../../mock/mock.module'
 
 describe('UserService', () => {
   let service: UserService
   let userRepository: Repository<User>
-
-  const mockRepo = {
-    save: jest.fn(),
-    update: jest.fn(),
-    find: jest.fn(),
-    findOne: jest.fn(),
-    insert: jest.fn(),
-    createQueryBuilder: jest.fn()
-  }
-
-  const mockUserRepository = {
-    findAll: jest.fn(),
-    findOne: jest.fn(),
-    remove: jest.fn(),
-    add: jest.fn()
-
-  }
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -35,11 +19,11 @@ describe('UserService', () => {
         UserService,
         {
           provide: UserRepositoryService,
-          useValue: mockUserRepository
+          useValue: RepositoryrMock.mockUserRepository
         },
         {
           provide: getRepositoryToken(User),
-          useValue: mockRepo
+          useValue: RepositoryrMock.mockRepo
         }
       ]
     }).compile()
@@ -53,12 +37,7 @@ describe('UserService', () => {
   })
 
   it('signUp should be compliant with the DTO', () => {
-    const registration = {
-      email: 'john.doe@gmail.com',
-      lastname: 'john',
-      firstname: 'doe',
-      password: 'password'
-    }
+    const registration = UserMock.userSignUp
     const validatedConfig = plainToInstance(RegistrationDTO, registration, { enableImplicitConversion: true })
     const errors = validateSync(validatedConfig)
     expect(errors.length).toBe(0)
