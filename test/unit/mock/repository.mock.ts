@@ -12,7 +12,7 @@ export class RepositoryrMock {
     findAll: jest.fn(),
     findOne: jest.fn(),
     remove: jest.fn(),
-    add: jest.fn()
+    save: jest.fn()
 
   }
 }

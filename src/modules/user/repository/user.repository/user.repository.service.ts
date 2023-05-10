@@ -18,11 +18,15 @@ export class UserRepositoryService {
     return this._usersRepository.findOneBy({ id })
   }
 
+  findOneEmail (email: string): Promise<User | null> {
+    return this._usersRepository.findOneBy({ email })
+  }
+
   async remove (id: number): Promise<void> {
     await this._usersRepository.delete(id)
   }
 
-  async add (data: Partial<User>): Promise<User> {    
+  async save (data: Partial<User>): Promise<User> {    
     return await this._usersRepository.save(data)
         
   }

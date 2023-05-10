@@ -21,7 +21,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "migration:generate:table": "npm run prebuild && npm run build && ts-node ./node_modules/typeorm/cli.js migration:generate ./db/migrations -d typeOrm.config.ts",
+    "migration:generate:table": "npm run prebuild && npm run build && ts-node ./node_modules/typeorm/cli.js migration:generate ./db/migrations/ -d typeOrm.config.ts",
     "migration:create": "ts-node ./node_modules/typeorm/cli.js migration:create db/migrations/",
     "entity:create": "ts-node ./node_modules/typeorm/cli.js entity:create db/entities/",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d ./typeOrm.config.ts",

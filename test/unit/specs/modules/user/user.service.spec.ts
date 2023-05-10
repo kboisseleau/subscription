@@ -12,6 +12,11 @@ import { UserMock, RepositoryrMock } from '../../../mock/mock.module'
 describe('UserService', () => {
   let service: UserService
   let userRepository: Repository<User>
+  let userRepositoryService: UserRepositoryService
+  
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -30,6 +35,7 @@ describe('UserService', () => {
 
     service = module.get<UserService>(UserService)
     userRepository = module.get<Repository<User>>(getRepositoryToken(User))
+    userRepositoryService = module.get<UserRepositoryService>(UserRepositoryService)
   })
 
   it('should be defined', () => {
@@ -43,8 +49,25 @@ describe('UserService', () => {
     expect(errors.length).toBe(0)
   })
 
-  it('signUp should return a registered user', () => {
-    expect(service).toBeDefined()
+  it('signUp should return a registered user', async () => {
+    const user = UserMock.userSignUp
+    const resUser = UserMock.users[0]
+    const save = RepositoryrMock.mockUserRepository.save
+    
+    save.mockResolvedValue(resUser)
+
+    const res = await service.signUp(user)
+    expect(res).toEqual(resUser)
+    expect(save).toHaveBeenCalledTimes(1)
+  })
+
+  it('should be defined', async () => {
+    const resUser = UserMock.users[1]
+    const findOne = RepositoryrMock.mockUserRepository.findOne
+    findOne.mockResolvedValue(resUser)
+    const res = await service.findOne('john.doe@gmail.com')
+    expect(res).toEqual(resUser)
+    expect(findOne).toHaveBeenCalledTimes(1)
   })
 
 })

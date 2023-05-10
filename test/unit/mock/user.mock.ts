@@ -1,5 +1,7 @@
+import { User } from 'db/entities/User'
+
 export class UserMock {
-  static readonly users = [
+  static readonly users: User[] = [
     {
       id: 1,
       email:'boisseleau.kevin@gmail.com',
@@ -16,7 +18,7 @@ export class UserMock {
     }
   ]
 
-  static readonly userSignUp = {
+  static readonly userSignUp: Partial<User> = {
     email: 'john.doe@gmail.com',
     lastname: 'john',
     firstname: 'doe',
