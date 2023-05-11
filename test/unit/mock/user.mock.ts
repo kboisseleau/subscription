@@ -5,8 +5,8 @@ export class UserMock {
     {
       id: 1,
       email:'boisseleau.kevin@gmail.com',
-      firstname: 'john',
-      lastname: '',
+      firstname: 'kevin',
+      lastname: 'boisseleau',
       password: 'test'
     },
     {

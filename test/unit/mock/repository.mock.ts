@@ -11,6 +11,7 @@ export class RepositoryrMock {
   static readonly mockUserRepository = {
     findAll: jest.fn(),
     findOne: jest.fn(),
+    findOneEmail: jest.fn(),
     remove: jest.fn(),
     save: jest.fn()
 

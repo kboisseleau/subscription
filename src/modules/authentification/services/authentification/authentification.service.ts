@@ -12,7 +12,7 @@ export class AuthentificationService {
   ) {}
     
   public async validateUser (email: string, pass: string): Promise<any> {
-    const utilisateur = await this._userService.findOne(email)
+    const utilisateur = await this._userService.findOneEmail(email)
 
     if (utilisateur && utilisateur.password === pass) {
       const { password, ...result } = utilisateur

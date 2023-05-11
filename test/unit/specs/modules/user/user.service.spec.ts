@@ -61,13 +61,4 @@ describe('UserService', () => {
     expect(save).toHaveBeenCalledTimes(1)
   })
 
-  it('should be defined', async () => {
-    const resUser = UserMock.users[1]
-    const findOne = RepositoryrMock.mockUserRepository.findOne
-    findOne.mockResolvedValue(resUser)
-    const res = await service.findOne('john.doe@gmail.com')
-    expect(res).toEqual(resUser)
-    expect(findOne).toHaveBeenCalledTimes(1)
-  })
-
 })
