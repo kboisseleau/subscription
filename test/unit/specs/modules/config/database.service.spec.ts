@@ -1,6 +1,6 @@
 import type { ConfigService } from '@nestjs/config'
 import { when } from 'jest-when'
-import { pgModuleFactory } from 'src/modules/config/database/class/dataSourceOptions'
+import { pgModuleFactory } from '../../../../../src/modules/config/database/class/dataSourceOptions'
 import { DataSourceOptions } from 'typeorm'
 
 describe('Database Helper', () => {
@@ -14,7 +14,7 @@ describe('Database Helper', () => {
   const dbPath = 'dist/db'
 
   const entitiesPath = `${dbPath}/entities/**/*.js`
-  const migrationssPath = `${dbPath}/migration/*.js`
+  const migrationssPath = `${dbPath}/migrations/*.js`
 
   beforeEach(() => {
     when(configServiceMock.getOrThrow as jest.Mock).calledWith('DATABASE_HOST').mockReturnValue(host)
@@ -26,7 +26,7 @@ describe('Database Helper', () => {
 
   describe('mongooseModuleFactory', () => {
     it('should return connection string when called.', () => {
-      expect(pgModuleFactory(configServiceMock as ConfigService)).toStrictEqual<DataSourceOptions>({
+      expect(pgModuleFactory(configServiceMock as ConfigService)).toEqual<DataSourceOptions>({
         type: 'postgres',
         host,
         port: parseInt(port),

@@ -1,7 +1,11 @@
-import { Module } from '@nestjs/common';
-import { StripeModule } from './services/stripe/stripe.module';
+import { Module } from '@nestjs/common'
+import { WebhookController } from './controller/webhook/webhook.controller'
+import { StripeService } from './services/stripe/stripe.service'
+import { UserModule } from '../user/user.module'
 
 @Module({
-  imports: [StripeModule]
+  imports: [ UserModule ],
+  controllers: [ WebhookController ],
+  providers: [ StripeService ]
 })
 export class SubscriptionModule {}

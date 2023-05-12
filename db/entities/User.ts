@@ -16,4 +16,10 @@ export class User {
 
   @Column()
   password: string
+
+  @Column({ nullable: true })
+  monthlySubscriptionStatus?: string
+
+  @Column({ nullable: true })
+  customerId?: string
 }
